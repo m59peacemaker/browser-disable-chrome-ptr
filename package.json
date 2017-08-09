@@ -1,0 +1,34 @@
+{
+  "name": "disable-chrome-ptr",
+  "version": "0.0.0",
+  "description": "Disables mobile Chrome's native pull-to-refresh and returns a function to re-enable it.",
+  "main": "build/disable-chrome-ptr.cjs.js",
+  "module": "build/disable-chrome-ptr.es.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "chrome",
+    "mobile",
+    "native",
+    "pull-to-refresh",
+    "pull",
+    "refresh",
+    "disable",
+    "prevent",
+    "toggle",
+    "off"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m59peacemaker/browser-disable-chrome-ptr"
+  },
+  "author": "Johnny Hauser <johnnyhauser@gmail.com>",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "bowser": "^1.7.1",
+    "rollup": "^0.45.2",
+    "rollup-plugin-commonjs": "^8.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  }
+}
