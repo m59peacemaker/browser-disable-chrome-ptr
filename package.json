@@ -1,6 +1,6 @@
 {
   "name": "disable-chrome-ptr",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Disables mobile Chrome's native pull-to-refresh and returns a function to re-enable it.",
   "main": "build/disable-chrome-ptr.cjs.js",
   "module": "build/disable-chrome-ptr.es.js",
