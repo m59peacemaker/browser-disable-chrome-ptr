@@ -1,8 +1,6 @@
 (function () {
 'use strict';
 
-// https://docs.google.com/document/d/12Ay4s3NWake8Qd6xQeGiYimGJ_gCe0UMDZKwP9Ni4m8/edit#
-
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 
@@ -617,6 +615,70 @@ var bowser = createCommonjsModule(function (module) {
 });
 });
 
-const enableChromePtr = (bowser.mobile && bowser.chrome) ? preventNativePtr() : () => {};
+// https://docs.google.com/document/d/12Ay4s3NWake8Qd6xQeGiYimGJ_gCe0UMDZKwP9Ni4m8/edit#
+
+const disableChromePtr = ({ disablePullGlow = true } = {}) => {
+  let shouldDisablePtr, lastTouchY;
+
+  const touchstart = e => {
+    lastTouchY = 0;
+    shouldDisablePtr = window.pageYOffset === 0;
+  };
+
+  const touchmove = e => {
+    const touchY = e.touches[0].clientY;
+    const touchYDelta = touchY - lastTouchY;
+    lastTouchY = touchY;
+
+    if (shouldDisablePtr) {
+      shouldDisablePtr = false;
+
+      if (touchYDelta > 0) {
+        return e.preventDefault()
+      }
+    }
+
+    if (disablePullGlow && window.pageYOffset === 0 && touchYDelta > 0) {
+      return e.preventDefault()
+    }
+  };
+
+  document.addEventListener('touchstart', touchstart, { passive: true }),
+  document.addEventListener('touchmove', touchmove, { passive: false });
+
+  return () => {
+    document.removeEventListener('touchstart', touchstart);
+    document.removeEventListener('touchmove', touchmove);
+  }
+};
+
+const disablePtr = () => (bowser.mobile && bowser.chrome) ? disableChromePtr() : () => {};
+
+const p = document.createElement('p');
+p.textContent = `If you're on mobile Chrome, touch the screen and move your finger downward per the traditional pull-to-refresh motion. Nothing should happen while Chrome's native pull to refresh is disabled.`;
+
+const checkbox = document.createElement('input');
+checkbox.type = 'checkbox';
+checkbox.checked = true;
+
+const label = document.createElement('label');
+label.textContent = 'Chrome pull-to-refresh disabled';
+
+let enablePtr;
+const toggle = (on) => {
+  if (on) {
+    enablePtr();
+    enablePtr = undefined;
+  } else {
+    enablePtr = disablePtr();
+  }
+};
+
+toggle(false);
+checkbox.addEventListener('change', e => toggle(!e.target.checked));
+
+document.body.appendChild(p);
+document.body.appendChild(checkbox);
+document.body.appendChild(label);
 
 }());
