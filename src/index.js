@@ -1,11 +1,11 @@
 // https://docs.google.com/document/d/12Ay4s3NWake8Qd6xQeGiYimGJ_gCe0UMDZKwP9Ni4m8/edit#
 
-const disableChromePtr = ({ preventPullGlow = true } = {}) => {
-  let shouldPreventPtr, lastTouchY
+const disableChromePtr = ({ disablePullGlow = true } = {}) => {
+  let shouldDisablePtr, lastTouchY
 
   const touchstart = e => {
     lastTouchY = 0
-    shouldPreventPtr = window.pageYOffset === 0
+    shouldDisablePtr = window.pageYOffset === 0
   }
 
   const touchmove = e => {
@@ -13,15 +13,15 @@ const disableChromePtr = ({ preventPullGlow = true } = {}) => {
     const touchYDelta = touchY - lastTouchY
     lastTouchY = touchY
 
-    if (shouldPreventPtr) {
-      shouldPreventPtr = false
+    if (shouldDisablePtr) {
+      shouldDisablePtr = false
 
       if (touchYDelta > 0) {
         return e.preventDefault()
       }
     }
 
-    if (preventPullGlow && window.pageYOffset === 0 && touchYDelta > 0) {
+    if (disablePullGlow && window.pageYOffset === 0 && touchYDelta > 0) {
       return e.preventDefault()
     }
   }
@@ -35,4 +35,4 @@ const disableChromePtr = ({ preventPullGlow = true } = {}) => {
   }
 }
 
-export default preventNativePtr
+export default disableChromePtr
