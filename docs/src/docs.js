@@ -1,5 +1,5 @@
 import bowser from 'bowser'
-import disableChromePtr from './'
+import disableChromePtr from '../../'
 const disablePtr = () => (bowser.mobile && bowser.chrome) ? disableChromePtr() : () => {}
 
 const p = document.createElement('p')

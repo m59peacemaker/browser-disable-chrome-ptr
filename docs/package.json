@@ -1,0 +1,13 @@
+{
+  "name": "",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "bowser": "^1.7.1",
+    "rollup": "^0.45.2",
+    "rollup-plugin-commonjs": "^8.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  }
+}

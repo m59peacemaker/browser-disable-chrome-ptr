@@ -1,9 +1,15 @@
-// https://docs.google.com/document/d/12Ay4s3NWake8Qd6xQeGiYimGJ_gCe0UMDZKwP9Ni4m8/edit#
+/*
+https://docs.google.com/document/d/12Ay4s3NWake8Qd6xQeGiYimGJ_gCe0UMDZKwP9Ni4m8
+*/
 
 const disableChromePtr = ({ disablePullGlow = true } = {}) => {
   let shouldDisablePtr, lastTouchY
 
   const touchstart = e => {
+    if (e.touches.length !== 1) {
+      return
+    }
+
     lastTouchY = 0
     shouldDisablePtr = window.pageYOffset === 0
   }

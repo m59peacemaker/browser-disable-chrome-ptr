@@ -10,9 +10,9 @@ const Plugins = () => [
 
 export default [
   {
-    entry: 'src/disable-chrome-ptr.mjs',
-    dest: 'build/disable-chrome-ptr.cjs.js',
-    format: 'cjs',
+    entry: 'src/docs.js',
+    dest: 'build/docs.js',
+    format: 'iife',
     plugins: Plugins()
   }
 ]
